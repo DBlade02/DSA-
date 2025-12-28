@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+class StackImpl implements Stack {
+    int[] stack;
+    int top = -1;
+
+    StackImpl(int n) {
+        stack = new int[n];
+    }
+
+    public void push(int x) {
+        if (!isFull()) stack[++top] = x;
+    }
+
+    public int pop() {
+        if (!isEmpty()) return stack[top--];
+        return -1;
+    }
+
+    public void display() {
+        for (int i = 0; i <= top; i++)
+            System.out.print(stack[i] + " ");
+        System.out.println();
+    }
+
+    public boolean isFull() {
+        return top == stack.length - 1;
+    }
+
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    public int size() {
+        return top + 1;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Stack size: ");
+        StackImpl s = new StackImpl(sc.nextInt());
+
+        int ch;
+        do {
+            System.out.println("1.Push 2.Pop 3.Display 4.Size 5.Full? 6.Empty? 0.Exit");
+            ch = sc.nextInt();
+
+            switch (ch) {
+                case 1 -> s.push(sc.nextInt());
+                case 2 -> System.out.println("Popped: " + s.pop());
+                case 3 -> s.display();
+                case 4 -> System.out.println("Size: " + s.size());
+                case 5 -> System.out.println(s.isFull());
+                case 6 -> System.out.println(s.isEmpty());
+            }
+        } while (ch != 0);
+    }
+}
