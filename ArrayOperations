@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+public class ArrayOperations {
+
+    static void display(int[] a) {
+        for (int x : a) System.out.print(x + " ");
+        System.out.println();
+    }
+
+    static void reverse(int[] a) {
+        for (int i = a.length - 1; i >= 0; i--)
+            System.out.print(a[i] + " ");
+        System.out.println();
+    }
+
+    static void replaceNth(int[] a, int n, int val) {
+        if (n >= 0 && n < a.length)
+            a[n] = val;
+    }
+
+    static int sum(int[] a) {
+        int s = 0;
+        for (int x : a) s += x;
+        return s;
+    }
+
+    static int max(int[] a) {
+        int m = a[0];
+        for (int x : a) if (x > m) m = x;
+        return m;
+    }
+
+    static double avg(int[] a) {
+        return (double) sum(a) / a.length;
+    }
+
+    static void evenOdd(int[] a) {
+        System.out.print("Even: ");
+        for (int x : a) if (x % 2 == 0) System.out.print(x + " ");
+        System.out.print("\nOdd: ");
+        for (int x : a) if (x % 2 != 0) System.out.print(x + " ");
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter size: ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+
+        for (int i = 0; i < n; i++)
+            a[i] = sc.nextInt();
+
+        int ch;
+        do {
+            System.out.println("\n1.Display 2.Reverse 3.Replace 4.Sum 5.Max 6.Avg 7.Even/Odd 0.Exit");
+            ch = sc.nextInt();
+
+            switch (ch) {
+                case 1 -> display(a);
+                case 2 -> reverse(a);
+                case 3 -> {
+                    System.out.print("Index & Value: ");
+                    replaceNth(a, sc.nextInt(), sc.nextInt());
+                }
+                case 4 -> System.out.println("Sum = " + sum(a));
+                case 5 -> System.out.println("Max = " + max(a));
+                case 6 -> System.out.println("Average = " + avg(a));
+                case 7 -> evenOdd(a);
+            }
+        } while (ch != 0);
+    }
+}
