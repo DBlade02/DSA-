@@ -1,0 +1,8 @@
+interface Stack {
+    void push(int x);
+    int pop();
+    void display();
+    boolean isFull();
+    boolean isEmpty();
+    int size();
+}
