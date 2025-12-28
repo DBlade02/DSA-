@@ -1,0 +1,31 @@
+import java.util.Stack;
+
+public class InfixToPostfix {
+
+    static int precedence(char c) {
+        if (c == '+' || c == '-') return 1;
+        if (c == '*' || c == '/') return 2;
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        String infix = "A+B*C";
+        Stack<Character> st = new Stack<>();
+        String postfix = "";
+
+        for (char c : infix.toCharArray()) {
+            if (Character.isLetterOrDigit(c))
+                postfix += c;
+            else {
+                while (!st.isEmpty() && precedence(st.peek()) >= precedence(c))
+                    postfix += st.pop();
+                st.push(c);
+            }
+        }
+
+        while (!st.isEmpty())
+            postfix += st.pop();
+
+        System.out.println("Postfix: " + postfix);
+    }
+}
